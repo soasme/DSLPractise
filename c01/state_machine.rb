@@ -55,10 +55,8 @@ class State < AbstractEvent
     @transitions = {}
   end
 
-  def add_actions(commands)
-    commands.each { |command|
-      @actions << command
-    }
+  def add_action(command)
+    @actions << command
   end
 
   def add_transitions(dict)
@@ -95,12 +93,13 @@ state_machine.add_states([
   idle,
 ])
 
-unlocked_pannel.add_actions([unlock_panel, lock_door])
+unlocked_pannel.add_action unlock_panel
+unlocked_pannel.add_action lock_door
 unlocked_pannel.add_transitions({
   panel_closed => idle
 })
 
-waiting_for_light.add_actions({
+waiting_for_light.add_transitions({
   light_on => unlocked_pannel
 })
 
@@ -113,7 +112,8 @@ active.add_transitions({
   light_on => waiting_for_drawer,
 })
 
-idle.add_actions([unlock_door, lock_panel])
+idle.add_action unlock_door
+idle.add_action lock_panel
 idle.add_transitions({
   door_closed => active
 })
