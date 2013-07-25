@@ -8,3 +8,9 @@ class AbstractEvent
     @code = code
   end
 end
+
+class State < AbstractEvent
+end
+
+class Command < AbstractEvent
+end
