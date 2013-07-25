@@ -59,10 +59,8 @@ class State < AbstractEvent
     @actions << command
   end
 
-  def add_transition(dict)
-    dict.each { |trigger, target|
-      @transitions[trigger] = Transition.new(self, target, trigger)
-    }
+  def add_transition(trigger, target)
+    @transitions[trigger] = Transition.new(self, target, trigger)
   end
 
 end
@@ -95,17 +93,17 @@ state_machine.add_states([
 
 unlocked_pannel.add_action unlock_panel
 unlocked_pannel.add_action lock_door
-unlocked_pannel.add_transition panel_closed => idle
+unlocked_pannel.add_transition panel_closed, idle
 
-waiting_for_light.add_transition light_on => unlocked_pannel
+waiting_for_light.add_transition light_on, unlocked_pannel
 
-waiting_for_drawer.add_transition drawer_opened => unlocked_pannel
+waiting_for_drawer.add_transition drawer_opened, unlocked_pannel
 
-active.add_transition drawer_opened => waiting_for_light
-active.add_transition light_on => waiting_for_drawer
+active.add_transition drawer_opened, waiting_for_light
+active.add_transition light_on, waiting_for_drawer
 
 idle.add_action unlock_door
 idle.add_action lock_panel
-idle.add_transition door_closed => active
+idle.add_transition door_closed, active
 
 puts state_machine.states.inspect
