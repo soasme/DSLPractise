@@ -14,3 +14,9 @@ end
 
 class Command < AbstractEvent
 end
+
+class Transition
+end
+
+class StateMachine
+end
