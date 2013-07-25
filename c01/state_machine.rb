@@ -39,18 +39,6 @@ class StateMachine
     @states = {}
   end
 
-  def add_events(triggers)
-    triggers.each { |trigger|
-      @events[trigger.name] = trigger
-    }
-  end
-
-  def add_commands(commands)
-    commands.each { |command|
-      @commands[command.name] = command
-    }
-  end
-
   def add_states(states)
     states.each {|state|
       @states[state.name] = state
@@ -88,24 +76,11 @@ drawer_opened = Event.new(:drawer_opened, 'D2OP')
 light_on = Event.new(:light_on, 'L1ON')
 door_opened = Event.new(:door_opened, 'D1OP')
 panel_closed = Event.new(:panel_closed, 'PNCL')
-state_machine.add_events([
-  door_closed,
-  drawer_opened,
-  light_on,
-  door_opened,
-  panel_closed,
-])
 
 unlock_panel = Command.new(:unlock_panel, 'PNUL')
 lock_panel = Command.new(:lock_panel, 'PNLK')
 unlock_door = Command.new(:unlock_door, 'D1UL')
 lock_door = Command.new(:lock_door, 'D1LK')
-state_machine.add_commands([
-  unlock_panel,
-  lock_panel,
-  unlock_door,
-  lock_door,
-])
 
 unlocked_pannel = State.new(:unlocked_pannel)
 waiting_for_light = State.new(:waiting_for_light)
