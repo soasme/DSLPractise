@@ -27,12 +27,14 @@
 + 2 arrays: one for saving key, one for saving value.
 + collision?: use next item not used.
 
+```
     for (i=hash(key); keys[i] != null; i = (i + 1) % M):
         if (keys[i] == key):
             vals[i] = val; # change val.
             return
     keys[i] = key;
     vals[i] = val;
+```
 
 + delete:
  - delete item and move all the next items.
