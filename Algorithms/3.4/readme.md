@@ -10,8 +10,10 @@
 + O(1).
 + hash code -> index
 
+```
     int hash(key x):
         (x.hash_code() & 0x7fffffff) % M # M: table size.
+```
 
 + cache hash code if consuming time.
 
@@ -42,6 +44,7 @@
 
 + performance: N/M should be in (1/8, 1/2). Avoid case[.........  . . .]
 
+```
     put(key):
         if N >= M/2:
             resize # re-hash all keys and values.
@@ -50,9 +53,10 @@
     delete(key):
         if N > 0 and N <= 1/8:
             resize
+```
 
 ### Memory Using
 
-SeparateChaningHashST: M SequentialSearchST(16 byte) with reference(8 byte); N node(24 byte with 3 reference[key, value, next]).
-LinearProbingHashST: 4N~16N reference.
++ SeparateChaningHashST: M SequentialSearchST(16 byte) with reference(8 byte); N node(24 byte with 3 reference[key, value, next]).
++ LinearProbingHashST: 4N~16N reference.
 
