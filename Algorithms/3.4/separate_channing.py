@@ -47,13 +47,12 @@ table = HashTable()
 table.set('hello', 'world')
 print table.get('hello')
 table.delete('hello')
-table.get('hello')
-
-'''world
-Traceback (most recent call last):
-  File "seperate_channing.py", line 51, in <module>
+try:
     table.get('hello')
-  File "seperate_channing.py", line 35, in get
-    raise NotFound, key
-__main__.NotFound: hello
-'''
+except NotFound:
+    print 'not found: ', 'hello'
+
+for i in range(30):
+    table.set(i, i)
+print table.array
+print table.get(20)
