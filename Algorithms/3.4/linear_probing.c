@@ -7,6 +7,7 @@ typedef char* string;
 typedef struct {
     string* keys;
     int* values;
+    int size;
 } LinearProbing;
 
 void linear_probing_init(LinearProbing* table, int size);
@@ -23,7 +24,8 @@ main(int argv, char** args){
     int hello;
     int size = 10;
 
-    linear_probing_init(table, size);
+    table = (LinearProbing*) malloc (sizeof(LinearProbing));
+    table->size = size;
 
     hello = linear_probing_get(table, "hello");
     printf("first get: %d\n", hello);
@@ -64,7 +66,19 @@ linear_probing_resize(LinearProbing* table, int size){
 
 int
 linear_probing_hash(LinearProbing* table, string key){
-
+    // ref: https://gist.github.com/soasme/6109366
+    unsigned int hash = 0;
+    unsigned int x    = 0;
+    unsigned int i    = 0;
+    for(i = 0; i < table->size; key++, i++) {
+        hash = (hash << 4) + (*key);
+        if((x = hash & 0xF0000000L) != 0)
+        {
+        hash ^= (x >> 24);
+        }
+        hash &= ~x;
+    }
+    return hash;
 }
 
 void
