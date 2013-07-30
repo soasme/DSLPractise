@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 typedef char* string;
 
@@ -40,12 +41,13 @@ main(int argv, char** args){
     // collision
     int i;
     for (i = 0; i < 11; i++) {
-        string key;
+        string key = (string) malloc (30);
         sprintf(key, "/key/%d", i);
 
         linear_probing_set(table, key, i);
         int value = linear_probing_get(table, key);
-        printf("get %s: %d", key, value);
+        printf("get %s: %d\n", key, value);
+        free(key);
     }
 
     linear_probing_print(table);
