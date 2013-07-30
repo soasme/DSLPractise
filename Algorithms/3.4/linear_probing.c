@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 
 typedef char* string;
 
@@ -13,6 +14,7 @@ int linear_probing_hash(LinearProbing* table, string key);
 void linear_probing_set(LinearProbing* table, string key, int value);
 int linear_probing_get(LinearProbing* table, string key);
 void linear_probing_delete(LinearProbing* table, string key);
+void linear_probing_print(LinearProbing* table);
 
 int
 main(int argv, char** args){
@@ -35,27 +37,50 @@ main(int argv, char** args){
     hello = linear_probing_get(table, "hello");
     printf("get after delete: %d\n", hello);
 
+    // collision
+    int i;
+    for (i = 0; i < 11; i++) {
+        string key;
+        sprintf(key, "/key/%d", i);
+
+        linear_probing_set(table, key, i);
+        int value = linear_probing_get(table, key);
+        printf("get %s: %d", key, value);
+    }
+
+    linear_probing_print(table);
     return 0;
 }
 
-void linear_probing_init(LinearProbing* table, int size){
+void
+linear_probing_init(LinearProbing* table, int size){
 }
 
-void linear_probing_resize(LinearProbing* table, int size){
+void
+linear_probing_resize(LinearProbing* table, int size){
 }
 
-int linear_probing_hash(LinearProbing* table, string key){
-
-}
-
-void linear_probing_set(LinearProbing* table, string key, int value){
-
-}
-
-int linear_probing_get(LinearProbing* table, string key){
+int
+linear_probing_hash(LinearProbing* table, string key){
 
 }
 
-void linear_probing_delete(LinearProbing* table, string key){
+void
+linear_probing_set(LinearProbing* table, string key, int value){
+
+}
+
+int
+linear_probing_get(LinearProbing* table, string key){
+    return 0;
+}
+
+void
+linear_probing_delete(LinearProbing* table, string key){
+
+}
+
+void
+linear_probing_print(LinearProbing* table) {
 
 }
