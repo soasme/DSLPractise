@@ -11,7 +11,7 @@ typedef struct {
 } LinearProbing;
 
 LinearProbing* linear_probing_init(int size);
-void linear_probing_resize(LinearProbing* table, int size);
+LinearProbing* linear_probing_resize(LinearProbing* table, int size);
 int linear_probing_hash(LinearProbing* table, string key);
 void linear_probing_set(LinearProbing* table, string key, int value);
 int linear_probing_get(LinearProbing* table, string key);
@@ -72,8 +72,19 @@ linear_probing_free(LinearProbing* table) {
     free(table);
 }
 
-void
+LinearProbing*
 linear_probing_resize(LinearProbing* table, int size){
+    LinearProbing* new_table = linear_probing_init(size);
+    int i;
+    for (i = 0; i < table->size; i++) {
+        if (table->keys[i]) {
+            int new_index = linear_probing_hash(new_table, table->keys[i]);
+            new_table->keys[new_index] = table->keys[i];
+            new_table->values[new_index] = table->values[i];
+        }
+    }
+    linear_probing_free(table);
+    return new_table;
 }
 
 int
