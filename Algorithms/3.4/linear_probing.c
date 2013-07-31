@@ -110,5 +110,12 @@ linear_probing_delete(LinearProbing* table, string key){
 
 void
 linear_probing_print(LinearProbing* table) {
-
+    int i;
+    printf("[table begin]\n");
+    for (i = 0; i < table->size; i++) {
+        if (table->keys[i] && table->values[i]) {
+            printf("[table] %s: %d\n", table->keys[i], table->values[i]);
+        }
+    }
+    printf("[table end]\n");
 }
