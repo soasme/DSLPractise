@@ -17,6 +17,7 @@ void linear_probing_set(LinearProbing* table, string key, int value);
 int linear_probing_get(LinearProbing* table, string key);
 void linear_probing_delete(LinearProbing* table, string key);
 void linear_probing_print(LinearProbing* table);
+void linear_probing_free(LinearProbing* table);
 
 int
 main(int argv, char** args){
@@ -51,6 +52,7 @@ main(int argv, char** args){
     }
 
     linear_probing_print(table);
+    linear_probing_free(table);
     return 0;
 }
 
@@ -61,6 +63,13 @@ linear_probing_init(int size){
     table->keys = (string*) malloc(sizeof(char) * 20 * size);
     table->values = (int*) malloc(sizeof(string) * size);
     return table;
+}
+
+void
+linear_probing_free(LinearProbing* table) {
+    free(table->keys);
+    free(table->values);
+    free(table);
 }
 
 void
