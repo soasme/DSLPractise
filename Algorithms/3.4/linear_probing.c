@@ -115,14 +115,14 @@ linear_probing_set(LinearProbing* table, string key, int value){
             return;
         }
 
-        if (strcmp(table->keys[index], key)) {
+        if (strcmp(table->keys[index], key) == 0) {
             table->values[index] = value;
             return;
         }
 
         index = (index + 1) % table->size;
         if (index == start) {
-            return;
+            break;
         }
     }
 }
@@ -136,7 +136,7 @@ linear_probing_get(LinearProbing* table, string key){
             return 0;
         }
 
-        if (strcmp(key, table->keys[index])) {
+        if (strcmp(key, table->keys[index]) == 0) {
             return table->values[index];
         }
 
