@@ -106,7 +106,25 @@ linear_probing_hash(LinearProbing* table, string key){
 
 void
 linear_probing_set(LinearProbing* table, string key, int value){
+    int start = linear_probing_hash(table, key) % table->size;
+    int index = start;
+    while (1) {
+        if (!table->keys[index]) {
+            table->keys[index] = key;
+            table->values[index] = value;
+            return;
+        }
 
+        if (strcmp(table->keys[index], key)) {
+            table->values[index] = value;
+            return;
+        }
+
+        index = (index + 1) % table->size;
+        if (index == start) {
+            return;
+        }
+    }
 }
 
 int
