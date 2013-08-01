@@ -111,6 +111,22 @@ linear_probing_set(LinearProbing* table, string key, int value){
 
 int
 linear_probing_get(LinearProbing* table, string key){
+    int start = linear_probing_hash(table, key) % table->size;
+    int index = start;
+    while (1) {
+        if (!table->keys[index]) {
+            return 0;
+        }
+
+        if (strcmp(key, table->keys[index])) {
+            return table->values[index];
+        }
+
+        index = (index + 1) % table->size;
+        if (index == start) {
+            break;
+        }
+    }
     return 0;
 }
 
