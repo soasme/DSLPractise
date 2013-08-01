@@ -22,7 +22,7 @@ void linear_probing_free(LinearProbing* table);
 int
 main(int argv, char** args){
     int hello;
-    int size = 10;
+    int size = 30;
 
     LinearProbing* table = linear_probing_init(size);
 
@@ -42,7 +42,7 @@ main(int argv, char** args){
     // collision
     int i;
     for (i = 0; i < 11; i++) {
-        string key = (string) malloc (30);
+        string key = (string) malloc (20);
         sprintf(key, "/key/%d", i);
 
         linear_probing_set(table, key, i);
@@ -159,7 +159,7 @@ linear_probing_print(LinearProbing* table) {
     printf("[table begin]\n");
     for (i = 0; i < table->size; i++) {
         if (table->keys[i] && table->values[i]) {
-            printf("[table] %s: %d\n", table->keys[i], table->values[i]);
+            printf("[table] [index %d] %s: %d\n", i, table->keys[i], table->values[i]);
         }
     }
     printf("[table end]\n");
